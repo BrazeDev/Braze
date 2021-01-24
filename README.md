@@ -127,3 +127,15 @@ Project Link: [https://github.com/thatsimplekid/braze](https://github.com/thatsi
 * The [TechnicPack](https://github.com/TechnicPack) team 
 
 This will be filled as required
+
+[contributors-shield]: https://img.shields.io/github/contributors/thatsimplekid/Braze.svg?style=for-the-badge
+[contributors-url]: https://github.com/thatsimplekid/Braze/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/thatsimplekid/Braze.svg?style=for-the-badge
+[forks-url]: https://github.com/thatsimplekid/Braze/network/members
+[stars-shield]: https://img.shields.io/github/stars/thatsimplekid/Braze.svg?style=for-the-badge
+[stars-url]: https://github.com/thatsimplekid/Braze/stargazers
+[issues-shield]: https://img.shields.io/github/issues/thatsimplekid/Braze.svg?style=for-the-badge
+[issues-url]: https://github.com/thatsimplekid/Braze/issues
+[license-shield]: https://img.shields.io/github/license/thatsimplekid/Braze.svg?style=for-the-badge
+[license-url]: https://github.com/thatsimplekid/Braze/blob/master/LICENSE.txt
+[product-screenshot]: images/screenshot.png
