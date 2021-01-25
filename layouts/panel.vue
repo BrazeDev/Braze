@@ -9,10 +9,18 @@
             </div>
             <div class="hidden md:block">
               <div class="ml-10 flex items-baseline space-x-4">
-                <NuxtLink to="/dashboard" class="headlink">Dashboard</NuxtLink>
-                <NuxtLink to="/modpacks" class="headlink">Modpacks</NuxtLink>
-                <NuxtLink to="/mods" class="headlink">Mods</NuxtLink>
-                <NuxtLink to="/settings" class="headlink">Settings</NuxtLink>
+                <NuxtLink to="/dashboard" class="headlink">
+                  Dashboard
+                </NuxtLink>
+                <NuxtLink to="/modpacks" class="headlink">
+                  Modpacks
+                </NuxtLink>
+                <NuxtLink to="/mods" class="headlink">
+                  Mods
+                </NuxtLink>
+                <NuxtLink to="/settings" class="headlink">
+                  Settings
+                </NuxtLink>
               </div>
             </div>
           </div>
@@ -28,7 +36,9 @@
                 <div>
                   <button class="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu" aria-haspopup="true">
                     <span class="sr-only">Log Out</span>
-                    <NuxtLink to="/login" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Log out</NuxtLink>
+                    <NuxtLink to="/login" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                      Log out
+                    </NuxtLink>
                   </button>
                 </div>
               </div>
@@ -59,14 +69,14 @@
 
 <script>
 export default {
-    head: {
-        title: 'Braze',
-    },
-    computed: {
-      title() {
-        return this.$store.getters['panel/getTitle']
-      }
+  head: {
+    title: 'Braze'
+  },
+  computed: {
+    title () {
+      return this.$store.getters['panel/getTitle']
     }
+  }
 }
 </script>
 

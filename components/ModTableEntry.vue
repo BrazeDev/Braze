@@ -10,14 +10,18 @@
             {{ mod.name }}
           </div>
           <div class="text-sm text-gray-500">
-            <a v-bind:href="mod.website">{{ mod.author }}</a>
+            <a :href="mod.website">{{ mod.author }}</a>
           </div>
         </div>
       </div>
     </td>
     <td class="px-6 py-4 whitespace-nowrap">
-      <div class="text-sm text-gray-900">{{ mod.latestversion }}</div>
-      <div class="text-sm text-gray-500">{{ mod.versions }} Versions</div>
+      <div class="text-sm text-gray-900">
+        {{ mod.latestversion }}
+      </div>
+      <div class="text-sm text-gray-500">
+        {{ mod.versions }} Versions
+      </div>
     </td>
     <td class="px-6 py-4 whitespace-nowrap">
       <span :class="`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${ mod.status == 1 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`">
