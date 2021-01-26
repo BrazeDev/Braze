@@ -1,19 +1,25 @@
 {
-  "name": "braze",
+  "name": "brtest",
   "version": "1.0.0",
-  "private": true,
+  "description": "",
+  "private": "true",
+  "main": "index.js",
   "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate",
-    "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
-    "lint": "npm run lint:js",
-    "test": "jest"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "core-js": "^3.8.2",
-    "nuxt": "^2.14.12"
+    "consola": "^2.15.0",
+    "eslint-plugin-jest": "^24.1.3",
+    "express": "^4.17.1",
+    "jest-puppeteer": "^4.4.0",
+    "minimist": "^1.2.5",
+    "nuxt": "^2.14.12",
+    "puppeteer": "^2.1.1",
+    "randomstring": "^1.1.5",
+    "supertest": "^6.1.3"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^5.0.0",
