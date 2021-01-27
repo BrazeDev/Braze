@@ -68,6 +68,15 @@ const verifyConfig = (config) => {
     consola.error(`${location} - Malformed config option: 'repoSubdir', must be between 1 and 32 chars. Got "${config.repoSubdir}"`)
     process.exit(1)
   }
+  if (typeof config.dbConnection === 'undefined' ||
+      typeof config.dbConnection.client === 'undefined' ||
+      config.dbConnection.client.matches(/^(pg)|(sqlite3)|(mysql)|(mssql)$/)) {
+    consola.error(`${location} - Malformed DB connection client, must be [ pg | sqlite3 | mysql | mssql ]. Got "${config.dbConnection.client}"`)
+    process.exit(1)
+  }
+  if (config.dbConnection.client === 'sqlite3' && process.env.NODE_ENV === 'production') {
+    consola.warn('SQLite databases are discouraged for production use. If you experience performance issues, consider using a different database provider')
+  }
   return config
 }
 

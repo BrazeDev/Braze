@@ -11,6 +11,18 @@ module.exports = {
    *    be hosted.
    *  http://your-server:3000/<repoSubdir>
   */
-  repoSubdir: 'repo'
+  repoSubdir: 'repo',
+
+  /** It is important that this is set up, as it is used by Braze
+   *    to store settings and other info.
+   *  If you're unsure, leave this as default, or check the link
+   *    below for info regarding syntax.
+   */
+  dbConnection: {
+    client: 'sqlite3',
+    connection: {
+      filename: './db/braze.db'
+    }
+  }
 
 }

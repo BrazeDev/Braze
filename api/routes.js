@@ -1,5 +1,5 @@
 const express = require('express')
-const config = require('~/config.js')
+const config = require('../config.js')
 const router = express.Router()
 
 router.get('/', (q, s, n) => {
