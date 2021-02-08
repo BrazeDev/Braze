@@ -1,5 +1,5 @@
 <template>
-  <div>a</div>
+  <p>404 Not Found</p>
 </template>
 
 <script>
@@ -10,8 +10,7 @@ export default {
   },
   methods: {
     pageLoaded () {
-      const GLITCH_CHARS = '`¡™£¢∞§¶•ªº–≠åß∂ƒ©˙∆˚¬…æ≈ç√∫˜µ≤≥÷/?░▒▓<>/'.split('')
-      // TODO Finish this
+
     }
   }
 }
