@@ -137,4 +137,4 @@ This will be filled as required
 [issues-url]: https://github.com/thatsimplekid/Braze/issues
 [license-shield]: https://img.shields.io/github/license/thatsimplekid/Braze.svg?style=for-the-badge
 [license-url]: https://github.com/thatsimplekid/Braze/blob/master/LICENSE.txt
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: meta/screenshot.png

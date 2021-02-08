@@ -18,6 +18,9 @@ const start = async () => {
   }
   app.use('/api', api)
   app.use(nuxt.render)
+  if (!nuxtConfig.dev) {
+    app.set('view cache', 1)
+  }
   app.listen(config.port, config.bind, () => {
     consola.ready({
       message: `Server listening on http://${config.bind}:${config.port}`,

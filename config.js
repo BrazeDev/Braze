@@ -70,7 +70,7 @@ const verifyConfig = (config) => {
   }
   if (typeof config.dbConnection === 'undefined' ||
       typeof config.dbConnection.client === 'undefined' ||
-      config.dbConnection.client.matches(/^(pg)|(sqlite3)|(mysql)|(mssql)$/)) {
+      !/^(pg)|(sqlite3)|(mysql)|(mssql)$/.test(config.dbConnection.client)) {
     consola.error(`${location} - Malformed DB connection client, must be [ pg | sqlite3 | mysql | mssql ]. Got "${config.dbConnection.client}"`)
     process.exit(1)
   }

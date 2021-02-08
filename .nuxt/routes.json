@@ -1,0 +1,23 @@
+[
+  {
+    "name": "modpacks",
+    "path": "/modpacks",
+    "component": "/home/ofl/brtest/pages/modpacks/index.vue",
+    "chunkName": "pages/modpacks/index",
+    "_name": "_25199c8c"
+  },
+  {
+    "name": "mods",
+    "path": "/mods",
+    "component": "/home/ofl/brtest/pages/mods/index.vue",
+    "chunkName": "pages/mods/index",
+    "_name": "_03bf701a"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "/home/ofl/brtest/pages/index.vue",
+    "chunkName": "pages/index",
+    "_name": "_201f24ba"
+  }
+]
