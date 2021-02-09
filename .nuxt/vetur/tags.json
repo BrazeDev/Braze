@@ -1,10 +1,4 @@
 {
-  "Astronaut": {
-    "description": "Auto imported from /components/Astronaut.vue"
-  },
-  "LazyAstronaut": {
-    "description": "Auto imported from /components/Astronaut.vue"
-  },
   "HeaderBar": {
     "description": "Auto imported from /components/HeaderBar.vue"
   },

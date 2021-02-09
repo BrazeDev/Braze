@@ -4,8 +4,8 @@ import { normalizeURL, decode } from '@nuxt/ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _6fd516bc = () => interopDefault(import('../pages/modpacks/index.vue' /* webpackChunkName: "pages/modpacks/index" */))
 const _062f824a = () => interopDefault(import('../pages/mods/index.vue' /* webpackChunkName: "pages/mods/index" */))
+const _33b1daa6 = () => interopDefault(import('../pages/packs/index.vue' /* webpackChunkName: "pages/packs/index" */))
 const _4318748a = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 // TODO: remove in Nuxt 3
@@ -25,13 +25,13 @@ export const routerOptions = {
   scrollBehavior,
 
   routes: [{
-    path: "/modpacks",
-    component: _6fd516bc,
-    name: "modpacks"
-  }, {
     path: "/mods",
     component: _062f824a,
     name: "mods"
+  }, {
+    path: "/packs",
+    component: _33b1daa6,
+    name: "packs"
   }, {
     path: "/",
     component: _4318748a,
