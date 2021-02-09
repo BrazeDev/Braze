@@ -2,22 +2,19 @@
   {
     "name": "modpacks",
     "path": "/modpacks",
-    "component": "/home/simples/Braze/pages/modpacks/index.vue",
-    "chunkName": "pages/modpacks/index",
-    "_name": "_5046d436"
+    "component": "/home/ofl/braze/pages/modpacks/index.vue",
+    "chunkName": "pages/modpacks/index"
   },
   {
     "name": "mods",
     "path": "/mods",
-    "component": "/home/simples/Braze/pages/mods/index.vue",
-    "chunkName": "pages/mods/index",
-    "_name": "_377eef22"
+    "component": "/home/ofl/braze/pages/mods/index.vue",
+    "chunkName": "pages/mods/index"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "/home/simples/Braze/pages/index.vue",
-    "chunkName": "pages/index",
-    "_name": "_0f90cfa7"
+    "component": "/home/ofl/braze/pages/index.vue",
+    "chunkName": "pages/index"
   }
 ]

@@ -4,9 +4,9 @@ import { normalizeURL, decode } from '@nuxt/ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _5046d436 = () => interopDefault(import('../pages/modpacks/index.vue' /* webpackChunkName: "pages/modpacks/index" */))
-const _377eef22 = () => interopDefault(import('../pages/mods/index.vue' /* webpackChunkName: "pages/mods/index" */))
-const _0f90cfa7 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
+const _6fd516bc = () => interopDefault(import('../pages/modpacks/index.vue' /* webpackChunkName: "pages/modpacks/index" */))
+const _062f824a = () => interopDefault(import('../pages/mods/index.vue' /* webpackChunkName: "pages/mods/index" */))
+const _4318748a = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 // TODO: remove in Nuxt 3
 const emptyFn = () => {}
@@ -26,15 +26,15 @@ export const routerOptions = {
 
   routes: [{
     path: "/modpacks",
-    component: _5046d436,
+    component: _6fd516bc,
     name: "modpacks"
   }, {
     path: "/mods",
-    component: _377eef22,
+    component: _062f824a,
     name: "mods"
   }, {
     path: "/",
-    component: _0f90cfa7,
+    component: _4318748a,
     name: "index"
   }],
 
