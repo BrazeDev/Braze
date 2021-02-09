@@ -141,5 +141,5 @@ Project Link: [https://github.com/thatsimplekid/braze](https://github.com/thatsi
 [issues-shield]: https://img.shields.io/github/issues/thatsimplekid/Braze.svg?style=for-the-badge
 [issues-url]: https://github.com/thatsimplekid/Braze/issues
 [license-shield]: https://img.shields.io/github/license/thatsimplekid/Braze.svg?style=for-the-badge
-[license-url]: https://github.com/thatsimplekid/Braze/blob/master/LICENSE.txt
+[license-url]: https://github.com/thatsimplekid/Braze/blob/master/LICENSE
 [product-screenshot]: meta/screenshot.png
