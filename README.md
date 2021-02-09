@@ -36,20 +36,22 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li><a href="#build-setup">Build Setup</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgements">Acknowledgements</a></li>
+    <li><a href="#thanks">Thanks</a></li>
   </ol>
 </details>
 
 ## About The Project
+
+**The master branch is unstable. Do not depend on it working correctly or even running at all.**
+
+checkout [stable](https://github.com/thatsimplekid/braze/tree/stable) (Not yet available)
 
 [![Braze Panel Screenshot][product-screenshot]](https://braze.fla.herty.xyz)
 
@@ -110,6 +112,10 @@ Contributions are what make the open source community such an amazing place to l
 4. Push to the Branch (`git push origin feature/newfeature`)
 5. Open a Pull Request
 
+If you wish to contribute to the development monetarily, I accept donations via crypto:
+
+BTC `1braze49sQ2q6JwSTbZkYs1NRiRfhkDaB`
+
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
@@ -125,7 +131,6 @@ Project Link: [https://github.com/thatsimplekid/braze](https://github.com/thatsi
 
 * The [TechnicPack](https://github.com/TechnicPack) team 
 
-This will be filled as required
 
 [contributors-shield]: https://img.shields.io/github/contributors/thatsimplekid/Braze.svg?style=for-the-badge
 [contributors-url]: https://github.com/thatsimplekid/Braze/graphs/contributors
