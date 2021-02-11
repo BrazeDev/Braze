@@ -1,24 +1,17 @@
 const express = require('express')
 const config = require('../config.js')
+const solderapi = require('./controllers/SolderAPIController')
 const router = express.Router()
 
-router.get('/', (q, s, n) => {
-  s.json({
-    api: 'Braze',
-    version: config.metadata.version,
-    stream: 'DEV'
-  })
-})
+router.get('/', solderapi.version)
 
-router.get('/verify', (q, s, n) => {
-  s.json({ error: 'No API key provided.' })
-})
+router.get('/verify', solderapi.verify)
 
 router.get('/verify/:key', (q, s, n) => {
   if (process.env.NODE_ENV !== 'PRODUCTION' && q.header('override-devkey') !== 'YES') {
     return s.json({
       valid: 'Key validated.',
-      name: 'DEVELOPMENT TEST KEY',
+      name: 'process.env.NODE_ENV != \'PRODUCTION\' - VALIDATION DISABLED',
       created_at: 'The beginning of time'
     })
   }

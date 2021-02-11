@@ -6,6 +6,9 @@
         Brazing the gap between your mods and Technic
       </small>
     </h1>
+    <h1 v-if="devenv" class="text-center pb-5 text-2xl font-fira text-red-500">
+      WARNING: Braze is running in dev mode: any API key will be treated as valid
+    </h1>
     <p class="text-justify">
       Braze is a super simple, yet powerful alternative to the official TechnicSolder. As per Technic's official documentation:<br>
       <span class="text-gray-600">TechnicSolder is an API that sits between a modpack repository and the Technic Launcher. It allows you to easily manage multiple modpacks in one single location.<br></span>
@@ -41,7 +44,8 @@ export default {
   data () {
     return {
       filelist: [],
-      showDesc: false
+      showDesc: false,
+      devenv: process.env.NODE_ENV !== 'PRODUCTION'
     }
   },
   head: {
