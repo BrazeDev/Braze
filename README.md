@@ -1,4 +1,5 @@
 [![Contributors][contributors-shield]][contributors-url]
+[![Discord][discord-shield]][discord-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
@@ -142,4 +143,6 @@ Project Link: [https://github.com/thatsimplekid/braze](https://github.com/thatsi
 [issues-url]: https://github.com/thatsimplekid/Braze/issues
 [license-shield]: https://img.shields.io/github/license/thatsimplekid/Braze.svg?style=for-the-badge
 [license-url]: https://github.com/thatsimplekid/Braze/blob/master/LICENSE
+[discord-shield]: https://img.shields.io/discord/810632951993597952?style=for-the-badge
+[discord-url]: https://discord.gg/u7wG9ZSNRn
 [product-screenshot]: meta/screenshot.png
