@@ -6,7 +6,18 @@ const config = require('../../config.js')
 
 const DatabaseController = {}
 
-DatabaseController.db = this.init(this.preInit(require('knex')(config.dbConnection)))
+DatabaseController.db = {}
+
+if (process.env.NODE_ENV === 'test') {
+  this.db = this.init(this.preInit(require('knex')({
+    client: 'sqlite3',
+    connection: {
+      filename: '../../db/test.db'
+    }
+  })))
+} else {
+  this.db = this.init(this.preInit(require('knex')(config.dbConnection)))
+}
 
 DatabaseController.preInit = (db) => {
   if (config.dbConnection.client === 'sqlite3' && !fs.existsSync(config.dbConnection.connection.filename)) {
@@ -28,7 +39,6 @@ DatabaseController.init = (db) => {
     table.integer('owner')
     table.string('name')
     table.string('slug')
-    table.string('mods')
     table.integer('enabled')
     table.integer('timestamp')
   })

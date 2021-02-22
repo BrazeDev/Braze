@@ -6,6 +6,8 @@ const api = require('../../api/routes')
 const app = express()
 const request = supertest(app)
 
+process.env.NODE_ENV = 'test'
+
 beforeAll(async () => {
   await app.use('/api', api)
   await app.listen(process.env.PORT || 3000)
@@ -47,4 +49,16 @@ describe('GET /api/v1', () => {
     expect(response.body.key).toMatch(/^(NOT_FOUND|(IN)?VALID)$/)
     expect(response.statusCode).toBe(200)
   })
+})
+
+describe('Testing authentication endpoints', () => {
+  test('Allows authorized users to log in', async)
+})
+
+describe('Testing token endpoints', () => {
+
+})
+
+describe('Testing key endpoints', () => {
+
 })
