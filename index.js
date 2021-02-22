@@ -1,5 +1,6 @@
 const express = require('express')
 const consola = require('consola')
+const bodyParser = require('body-parser')
 const { Nuxt, Builder } = require('nuxt')
 const api = require('./api/routes.js')
 const config = require('./config.js')
@@ -16,6 +17,7 @@ const start = async () => {
     const builder = new Builder(nuxt)
     await builder.build()
   }
+  app.use(bodyParser.urlencoded({ extended: true }))
   app.use('/api', api)
   app.use(nuxt.render)
   if (!nuxtConfig.dev) {

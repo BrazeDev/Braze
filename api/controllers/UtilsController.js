@@ -1,6 +1,6 @@
 const legit = require('legit')
 const config = require('../../config.js')
-const burners = require('~/burnermail.json')
+const burners = require('../../burnermail.json')
 
 const UtilsController = {}
 

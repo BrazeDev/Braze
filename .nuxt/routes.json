@@ -1,23 +1,37 @@
 [
   {
+    "name": "login",
+    "path": "/login",
+    "component": "/home/herty/braze/pages/login.vue",
+    "chunkName": "pages/login",
+    "_name": "_0cdcb892"
+  },
+  {
     "name": "mods",
     "path": "/mods",
-    "component": "/home/ofl/braze/pages/mods/index.vue",
+    "component": "/home/herty/braze/pages/mods/index.vue",
     "chunkName": "pages/mods/index",
-    "_name": "_062f824a"
+    "_name": "_b5e7e9d4"
   },
   {
     "name": "packs",
     "path": "/packs",
-    "component": "/home/ofl/braze/pages/packs/index.vue",
+    "component": "/home/herty/braze/pages/packs/index.vue",
     "chunkName": "pages/packs/index",
-    "_name": "_33b1daa6"
+    "_name": "_dff0d46a"
+  },
+  {
+    "name": "register",
+    "path": "/register",
+    "component": "/home/herty/braze/pages/register.vue",
+    "chunkName": "pages/register",
+    "_name": "_598bc5c5"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "/home/ofl/braze/pages/index.vue",
+    "component": "/home/herty/braze/pages/index.vue",
     "chunkName": "pages/index",
-    "_name": "_4318748a"
+    "_name": "_2fea00a0"
   }
 ]

@@ -8,8 +8,9 @@ import '../assets/css/tailwind.css'
 
 import _6f6c098b from '../layouts/default.vue'
 import _899ead9e from '../layouts/error-l.vue'
+import _77dd5794 from '../layouts/plain.vue'
 
-const layouts = { "_default": sanitizeComponent(_6f6c098b),"_error-l": sanitizeComponent(_899ead9e) }
+const layouts = { "_default": sanitizeComponent(_6f6c098b),"_error-l": sanitizeComponent(_899ead9e),"_plain": sanitizeComponent(_77dd5794) }
 
 export default {
   render (h, props) {

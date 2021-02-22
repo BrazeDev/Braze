@@ -41,6 +41,7 @@ module.exports = {
    */
   dbConnection: {
     client: 'sqlite3',
+    useNullAsDefault: true,
     connection: {
       filename: './db/braze.db'
     }

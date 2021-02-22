@@ -52,7 +52,38 @@ describe('GET /api/v1', () => {
 })
 
 describe('Testing authentication endpoints', () => {
-  test('Allows authorized users to log in', async)
+  let mesg1 = ''
+  let mesg2 = ''
+  test('Allows authorized users to log in', async () => {
+    const response = await request.get('/api/auth/login').send({
+      username: 'admin', password: 'ChangeMeFirst!'
+    })
+    expect(response).toBeDefined()
+    expect(response.body.success).toBe(true)
+    expect(response.statusCode).toBe(200)
+  })
+  test('Prevents login with incorrect password', async () => {
+    const response = await request.get('/api/auth/login').send({
+      username: 'admin', password: 'ChangeMeFirst!'
+    })
+    mesg1 = response.body.message
+    expect(response).toBeDefined()
+    expect(response.body.success).toBe(true)
+    expect(response.statusCode).toBe(200)
+  })
+  test('Prevents login with incorrect username', async () => {
+    const response = await request.get('/api/auth/login').send({
+      username: 'admin', password: 'ChangeMeFirst!'
+    })
+    mesg2 = response.body.message
+    expect(response).toBeDefined()
+    expect(response.body.success).toBe(true)
+    expect(response.statusCode).toBe(200)
+  })
+  test('Error message doesn\'t allow for username enumeration', () => {
+    expect(mesg1 === mesg2).toBeFalsy()
+  })
+  // TODO check timings to thwart side-channel attacks
 })
 
 describe('Testing token endpoints', () => {
