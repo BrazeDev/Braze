@@ -34,50 +34,58 @@ DatabaseController.preInit = (db) => {
 }
 
 DatabaseController.init = (db) => {
-  if (!db.schema.hasTable('packs')) {
-    db.schema.createTable('packs', (table) => {
-      table.increments()
-      table.integer('owner')
-      table.string('name')
-      table.string('slug')
-      table.integer('enabled')
-      table.integer('timestamp')
-    })
-  }
-  if (!db.schema.hasTable('mods')) {
-    db.schema.createTable('mods', (table) => {
-      table.increments()
-      table.integer('user')
-      table.string('name')
-      table.string('slug')
-      table.string('version')
-      table.string('filename')
-      table.string('md5')
-      table.integer('enabled')
-      table.integer('timestamp')
-    })
-  }
-  if (!db.schema.hasTable('apikeys')) {
-    db.schema.createTable('apikeys', (table) => {
-      table.increments()
-      table.integer('owner')
-      table.string('keyname')
-      table.string('key')
-      table.integer('timestamp')
-    })
-  }
-  if (!db.schema.hasTable('users')) {
-    db.schema.createTable('users', (table) => {
-      table.increments()
-      table.string('username')
-      table.string('email')
-      table.string('password')
-      table.string('NaCl')
-      table.string('token')
-      table.integer('permissions') // See PermissionsController for format info
-      table.integer('timestamp')
-    })
-  }
+  db.schema.hasTable('packs').then((r) => {
+    if (!r) {
+      db.schema.createTable('packs', (table) => {
+        table.increments()
+        table.integer('owner')
+        table.string('name')
+        table.string('slug')
+        table.integer('enabled')
+        table.integer('timestamp')
+      }).then(() => {})
+    }
+  })
+  db.schema.hasTable('mods').then((r) => {
+    if (!r) {
+      db.schema.createTable('mods', (table) => {
+        table.increments()
+        table.integer('user')
+        table.string('name')
+        table.string('slug')
+        table.string('version')
+        table.string('filename')
+        table.string('md5')
+        table.integer('enabled')
+        table.integer('timestamp')
+      }).then(() => {})
+    }
+  })
+  db.schema.hasTable('apikeys').then((r) => {
+    if (!r) {
+      db.schema.createTable('apikeys', (table) => {
+        table.increments()
+        table.integer('owner')
+        table.string('keyname')
+        table.string('key')
+        table.integer('timestamp')
+      }).then(() => {})
+    }
+  })
+  db.schema.hasTable('users').then((r) => {
+    if (!r) {
+      db.schema.createTable('users', (table) => {
+        table.increments()
+        table.string('username')
+        table.string('email')
+        table.string('password')
+        table.string('NaCl')
+        table.string('token')
+        table.integer('permissions') // See PermissionsController for format info
+        table.integer('timestamp')
+      }).then(() => {})
+    }
+  })
   if (config.resetAdminPass) {
     db('users').where({ username: 'admin' }).then((u) => {
       if (u.length > 0) {

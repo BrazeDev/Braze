@@ -20,7 +20,7 @@ module.exports = {
    *  performMXLookup - checks to ensure the email address belongs
    *   to a correctly configured mail server
    */
-  enableRegistration: true,
+  enableRegistration: false,
   blockBurnerDomains: true,
   performMXLookup: true,
 

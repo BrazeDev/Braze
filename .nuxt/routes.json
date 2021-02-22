@@ -3,35 +3,30 @@
     "name": "login",
     "path": "/login",
     "component": "/home/herty/braze/pages/login.vue",
-    "chunkName": "pages/login",
-    "_name": "_0cdcb892"
+    "chunkName": "pages/login"
   },
   {
     "name": "mods",
     "path": "/mods",
     "component": "/home/herty/braze/pages/mods/index.vue",
-    "chunkName": "pages/mods/index",
-    "_name": "_b5e7e9d4"
+    "chunkName": "pages/mods/index"
   },
   {
     "name": "packs",
     "path": "/packs",
     "component": "/home/herty/braze/pages/packs/index.vue",
-    "chunkName": "pages/packs/index",
-    "_name": "_dff0d46a"
+    "chunkName": "pages/packs/index"
   },
   {
     "name": "register",
     "path": "/register",
     "component": "/home/herty/braze/pages/register.vue",
-    "chunkName": "pages/register",
-    "_name": "_598bc5c5"
+    "chunkName": "pages/register"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/home/herty/braze/pages/index.vue",
-    "chunkName": "pages/index",
-    "_name": "_2fea00a0"
+    "chunkName": "pages/index"
   }
 ]
