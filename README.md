@@ -4,6 +4,7 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
+[![Build][build-shield]][build-url]
 
 <br />
 <p align="center">
@@ -145,4 +146,6 @@ Project Link: [https://github.com/thatsimplekid/braze](https://github.com/thatsi
 [license-url]: https://github.com/thatsimplekid/Braze/blob/master/LICENSE
 [discord-shield]: https://img.shields.io/discord/810632951993597952?style=for-the-badge
 [discord-url]: https://discord.gg/u7wG9ZSNRn
+[build-shield]: https://img.shields.io/drone/build/thatsimplekid/Braze?server=https%3A%2F%2Fdrone.thatsimplekid.com&style=for-the-badge
+[build-url]: https://drone.thatsimplekid.com/thatsimplekid/Braze/
 [product-screenshot]: meta/screenshot.png
