@@ -5,6 +5,10 @@ const burners = require('../../burnermail.json')
 
 const UtilsController = {}
 
+{
+  
+}
+
 UtilsController.verifyEmail = async (address) => {
   // Check email conforms with RFC 5322
   // Idk how this works but it's from https://stackoverflow.com/questions/201323/how-to-validate-an-email-address-using-a-regular-expression

@@ -18,4 +18,8 @@ steps:
     image: quay.io/natlibfi/njsscan
     commands:
       - njsscan dist
-      
+
+  - name: ESLint
+    image: cytopia/eslint
+    commands:
+      - eslint ./ --ext vue,js
