@@ -9,11 +9,16 @@ trigger:
     - tag
 
 steps:
-  - name: NPM-Audit
-    image: node:12
+  - name: NPM Audit
+    image: node:alpine
     commands:
       - npm audit --package-lock-only --production --audit-level=moderate
   
+  - name: Install Packages
+    image: node:alpine
+    commands:
+      - npm ci
+
   - name: Static-Analysis
     image: quay.io/natlibfi/njsscan
     commands:

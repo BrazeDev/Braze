@@ -129,7 +129,9 @@
         I wanted a <strong>200</strong> but all I got was this stupid <strong>500</strong>
       </p>
       <p>
-        <NuxtLink to="/" class="link">Take me back!</NuxtLink>
+        <NuxtLink to="/" class="link">
+          Take me back!
+        </NuxtLink>
       </p>
     </article>
   </main>
@@ -138,7 +140,12 @@
 <script>
 export default {
   layout: 'error-l',
-  props: ['error']
+  props: {
+    error: {
+      type: Object,
+      default () { return { statusCode: 500 } }
+    }
+  }
 }
 </script>
 

@@ -1,10 +1,3 @@
-<!--
-  TODO: This page NEEDS (I can't remember what I needed to do, so - Owen fill this in
-                         when you remember what needs to be done here.)
-
-    - Yes I did forget the TODO note halfway through writing it
- -->
-
 <template>
   <div class="flex flex-col h-screen my-auto items-center pt-32">
     <img src="/logo.png" class="w-24">

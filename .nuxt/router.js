@@ -4,11 +4,11 @@ import { normalizeURL, decode } from '@nuxt/ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _afc92e5c = () => interopDefault(import('../pages/login.vue' /* webpackChunkName: "pages/login" */))
-const _062f824a = () => interopDefault(import('../pages/mods/index.vue' /* webpackChunkName: "pages/mods/index" */))
-const _33b1daa6 = () => interopDefault(import('../pages/packs/index.vue' /* webpackChunkName: "pages/packs/index" */))
-const _e807b26c = () => interopDefault(import('../pages/register.vue' /* webpackChunkName: "pages/register" */))
-const _4318748a = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
+const _0cdcb892 = () => interopDefault(import('../pages/login.vue' /* webpackChunkName: "pages/login" */))
+const _b5e7e9d4 = () => interopDefault(import('../pages/mods/index.vue' /* webpackChunkName: "pages/mods/index" */))
+const _dff0d46a = () => interopDefault(import('../pages/packs/index.vue' /* webpackChunkName: "pages/packs/index" */))
+const _598bc5c5 = () => interopDefault(import('../pages/register.vue' /* webpackChunkName: "pages/register" */))
+const _2fea00a0 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 // TODO: remove in Nuxt 3
 const emptyFn = () => {}
@@ -28,23 +28,23 @@ export const routerOptions = {
 
   routes: [{
     path: "/login",
-    component: _afc92e5c,
+    component: _0cdcb892,
     name: "login"
   }, {
     path: "/mods",
-    component: _062f824a,
+    component: _b5e7e9d4,
     name: "mods"
   }, {
     path: "/packs",
-    component: _33b1daa6,
+    component: _dff0d46a,
     name: "packs"
   }, {
     path: "/register",
-    component: _e807b26c,
+    component: _598bc5c5,
     name: "register"
   }, {
     path: "/",
-    component: _4318748a,
+    component: _2fea00a0,
     name: "index"
   }],
 

@@ -5,10 +5,6 @@ const burners = require('../../burnermail.json')
 
 const UtilsController = {}
 
-{
-  
-}
-
 UtilsController.verifyEmail = async (address) => {
   // Check email conforms with RFC 5322
   // Idk how this works but it's from https://stackoverflow.com/questions/201323/how-to-validate-an-email-address-using-a-regular-expression
@@ -33,6 +29,7 @@ UtilsController.verifyToken = async (q, s, cb) => {
   if (!q.headers.authorization.toString().split(' ')[1]) { s.status(401).json({ success: false, message: 'No token provided' }) }
   await jwt.verify(q.headers.authorization.toString().split(' ')[1], config.jwtSecret, (e, t) => {
     if (e) { return s.status(500).json({ success: false, message: 'There was a problem processing your request' }) }
+    if (!t) { return s.status(500).json({ success: false, message: 'There was a problem processing your request' }) }
     cb(t)
   })
 }

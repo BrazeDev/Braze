@@ -11,7 +11,8 @@ attachPaginate()
 
 const AuthController = {}
 
-// User Authentication Operations
+/** User Authentication
+ *  -------------------  */
 
 AuthController.registerUser = async (q, s, n) => {
   if (!config.enableRegister) { return s.json({ success: false, message: 'Registration is disabled' }) }
@@ -73,7 +74,8 @@ AuthController.fetchUser = async (q, s, n) => {
   })
 }
 
-// API Key Operations
+/** API Keys
+ *  -------------------  */
 
 AuthController.verifyKey = async (q, s, n) => {
   if (process.env.NODE_ENV !== 'PRODUCTION' && q.header('override-devkey') !== 'YES') {
