@@ -3,6 +3,14 @@ module.exports = {
   bind: '0.0.0.0',
   port: 3000,
 
+  /** This is going to be changed in a future release!
+   *  Sets the base URL that is used by axios for requests, as it
+   *  isn't too smart and needs this to make requests. This will
+   *  eventually be obtained automatically, but the code for it
+   *  isn't yet finished. Keep an eye on this file for updates.
+   */
+  baseURL: 'http://127.0.0.1:3000',
+
   /** Whether to create an admin account. If one exists, setting
    *  this to true will reset the password.
    *  For this user, the username is 'admin'.

@@ -11,21 +11,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-
-function authenticate () {
-  if (localStorage.getItem('token') === undefined) { return window.location.replace('/login') }
-  axios.post('/auth/token', { token: localStorage.getItem('token') })
-    .then((res) => {
-      if (res.data.success === false) { return window.location.replace('/login') }
-      localStorage.setItem('user', res.data.user)
-    })
-}
-
-if (process.browser) {
-  authenticate()
-}
-
 export default {
 
 }

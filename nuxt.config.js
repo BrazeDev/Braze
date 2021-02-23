@@ -1,4 +1,4 @@
-/* eslint-disable nuxt/no-cjs-in-config */
+// eslint-disable-next-line nuxt/no-cjs-in-config
 module.exports = {
   head: {
     title: 'braze',
@@ -17,6 +17,10 @@ module.exports = {
 
   telemetry: false,
 
+  axios: {
+    baseURL: require('./config.js').baseURL
+  },
+
   css: [
   ],
 
@@ -24,7 +28,9 @@ module.exports = {
   ],
 
   router: {
-    middleware: ['auth']
+    middleware: [
+      'auth'
+    ]
   },
 
   components: true,
@@ -40,11 +46,32 @@ module.exports = {
   ],
 
   auth: {
+    localStorage: false,
+    cookie: {
+      options: {
+        expires: 7
+      }
+    },
     strategies: {
       local: {
-
+        token: {
+          property: 'token'
+        },
+        user: {
+          property: 'user',
+          autoFetch: true
+        },
+        endpoints: {
+          login: { url: '/api/auth/login', method: 'post' },
+          logout: false,
+          user: false
+          /* logout: { url: '/api/auth/logout', method: 'post' },
+          user: { url: '/api/auth/user', method: 'get' } */
+        }
       }
-    }
+    },
+    plugins: [
+    ]
   },
 
   build: {

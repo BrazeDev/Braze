@@ -28,7 +28,15 @@ AuthController.verifyUser = async (q, s, n) => {
     if (r === false) {
       return s.json({ success: false, message: 'Incorrect username/password' })
     }
-    return s.json({ success: true, token: user.token })
+    return s.json({
+      success: true,
+      token: user.token,
+      user: {
+        username: user.username,
+        email: user.email,
+        permissions: user.permissions
+      }
+    })
   })
 }
 
