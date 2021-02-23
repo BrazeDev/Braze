@@ -1,0 +1,21 @@
+---
+kind: pipeline
+type: docker
+name: Default
+
+trigger:
+  event:
+    - push
+    - tag
+
+steps:
+  - name: NPM-Audit
+    image: node:12
+    commands:
+      - npm audit --package-lock-only --production --audit-level=moderate
+  
+  - name: Static-Analysis
+    image: quay.io/natlibfi/njsscan
+    commands:
+      - njsscan dist
+      
