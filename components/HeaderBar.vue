@@ -5,14 +5,28 @@
       <span class="pl-3 inline-block font-fira align-middle">Braze</span>
     </a>
     <span class="pl-1 inline-block text-gray-500 font-fira align-middle">Braze.dev {{ version }}</span>
+    <span id="username"></span>
   </header>
 </template>
 
 <script>
+
+let username = ''
+
+function updateUsername () {
+  username = localStorage.getItem('user')
+  document.getElementById('username').innerHTML = username
+}
+
+if (process.browser) {
+  setTimeout(updateUsername, 20)
+}
+
 export default {
   data () {
     return {
-      version: require('~/metadata.json').version
+      version: require('~/metadata.json').version,
+      username
     }
   }
 }

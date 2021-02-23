@@ -23,6 +23,10 @@ module.exports = {
   plugins: [
   ],
 
+  router: {
+    middleware: ['auth']
+  },
+
   components: true,
 
   buildModules: [
@@ -31,7 +35,17 @@ module.exports = {
   ],
 
   modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/auth-next'
   ],
+
+  auth: {
+    strategies: {
+      local: {
+
+      }
+    }
+  },
 
   build: {
   }

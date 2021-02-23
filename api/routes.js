@@ -23,7 +23,7 @@ router.get('/v1/', (q, s, n) => {
 
 // Authentication
 
-router.get('/auth/login', (q, s, n) => AuthController.verifyUser(q, s, n))
+router.post('/auth/login', (q, s, n) => AuthController.verifyUser(q, s, n))
 router.post('/auth/register', (q, s, n) => AuthController.register(q, s, n))
 router.post('/auth/reset', (q, s, n) => AuthController.changePassword(q, s, n))
 router.get('/auth/token', (q, s, n) => AuthController.showToken(q, s, n))

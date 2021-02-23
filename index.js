@@ -18,6 +18,7 @@ const start = async () => {
     await builder.build()
   }
   app.use(bodyParser.urlencoded({ extended: true }))
+  app.use(bodyParser.json())
   app.use('/api', api)
   app.use(nuxt.render)
   if (!nuxtConfig.dev) {

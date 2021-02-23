@@ -1,5 +1,6 @@
 {
   "version": "v0.1.8",
   "solderVersion": "v0.7.5.2",
-  "stream": "DEV"
+  "stream": "DEV",
+  "lastCommit": "83b45fd4313a2e79c2a0c6450e80109119ad9ed9"
 }
