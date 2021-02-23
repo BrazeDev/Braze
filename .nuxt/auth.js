@@ -54,7 +54,15 @@ export default function (ctx, inject) {
       "method": "post"
     },
     "logout": false,
-    "user": false
+    "user": {
+      "url": "/api/auth/user",
+      "method": "get"
+    }
+  },
+  "redirect": {
+    "login": "/login",
+    "logout": "/login",
+    "home": "/"
   },
   "name": "local"
 }))

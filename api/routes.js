@@ -24,11 +24,8 @@ router.get('/v1/', (q, s, n) => {
 // Authentication
 
 router.post('/auth/login', (q, s, n) => AuthController.verifyUser(q, s, n))
-router.post('/auth/register', (q, s, n) => AuthController.register(q, s, n))
-router.post('/auth/reset', (q, s, n) => AuthController.changePassword(q, s, n))
-router.get('/auth/token', (q, s, n) => AuthController.showToken(q, s, n))
-router.post('/auth/token', (q, s, n) => AuthController.verifyToken(q, s, n))
-router.delete('/auth/token', (q, s, n) => AuthController.resetToken(q, s, n))
+router.post('/auth/register', (q, s, n) => AuthController.registerUser(q, s, n))
+router.get('/auth/user', (q, s, n) => AuthController.fetchUser(q, s, n))
 
 // API Keys
 

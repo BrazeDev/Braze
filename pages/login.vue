@@ -76,10 +76,10 @@ export default {
       }
       if (username.length === 0 || password.length === 0) { return }
       try {
-        const response = await this.$auth.loginWith('local', { data: this.login })
-        console.log(response)
+        /* const response = */
+        await this.$auth.loginWith('local', { data: this.login })
       } catch (e) {
-        console.log(e)
+        Swal.fire({ icon: 'error', title: e.toString().split(': ')[1] })
       }
     },
     test () {

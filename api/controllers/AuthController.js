@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken')
 const randomstring = require('randomstring')
 const { attachPaginate } = require('knex-paginate')
 const consola = require('consola')
@@ -10,135 +11,66 @@ attachPaginate()
 
 const AuthController = {}
 
-AuthController.verifyUser = async (q, s, n) => {
-  const username = q.body.username
-  const password = q.body.password
-  if (username === undefined || password === undefined) {
-    return s.json({ success: false, message: 'Missing username/password' })
-  }
-  const user = await db('users').where('username', username).first()
-  if (!user) {
-    return s.json({ success: false, message: 'Incorrect username/password' })
-  }
-  bcrypt.compare(`${password}-${username}-${user.NaCl}`, user.password, (e, r) => {
-    if (e) {
-      consola.error(e)
-      return s.status(500).json({ success: false, message: 'There was an error processing your request' })
-    }
-    if (r === false) {
-      return s.json({ success: false, message: 'Incorrect username/password' })
-    }
-    return s.json({
-      success: true,
-      token: user.token,
-      user: {
-        username: user.username,
-        email: user.email,
-        permissions: user.permissions
-      }
-    })
-  })
-}
+// User Authentication Operations
 
-AuthController.authorize = async (q, s) => {
-  const token = q.headers.token
-  if (token === undefined) { return s.status(401).json({ success: false, message: 'Token not present' }) }
-  const user = await db('users').where('token', token).first()
-  if (!user) { return s.status(401).json({ success: false, message: 'Invalid token' }) }
-  return user
-}
-
-AuthController.checkName = async (q, s, n) => {
-  if (!config.enableRegister) {
-    return s.json({ success: false, message: 'Please don\'t use this to enumerate users. Ratelimited 1req/s' })
+AuthController.registerUser = async (q, s, n) => {
+  if (!config.enableRegister) { return s.json({ success: false, message: 'Registration is disabled' }) }
+  if (!q.body.username || !q.body.password || !q.body.mailaddr) {
+    return s.status(401).json({ success: false, message: 'Required info missing' })
   }
-  const user = await db('users').where('username', q.body.username).first()
-  if (user) { s.json({ success: true, exists: true }) } else { s.json({ success: true, exists: false }) }
-}
-
-AuthController.register = async (q, s, n) => {
-  if (!config.enableRegister) {
-    return s.json({ success: false, message: 'Registration is disabled' })
-  }
-  const username = q.body.username
-  const password = q.body.password
-  const mailaddr = q.body.mailaddr
-  if (username === undefined) { return s.json({ success: false, message: 'No username provided' }) }
-  if (password === undefined) { return s.json({ success: false, message: 'No password provided' }) }
-  if (mailaddr === undefined) { return s.json({ success: false, message: 'No email address provided' }) }
-  if (username.length < 4 || username.length > 32) { return s.json({ success: false, message: 'Invalid username provided' }) }
-  if (password.length < 8 || password.length > 64) { return s.json({ success: false, message: 'Invalid password provided' }) }
-  if (await !utils.verifyEmail(mailaddr)) { return s.json({ success: false, message: 'Invalid email address provided' }) }
-  // This is reeeeally hacky and I hate it. TODO: Move username checking to utils
-  // update here and AuthController.checkName accordingly.
-  const exists = await this.checkName(q, {
-    json (data) {
-      return data.exists || false
-    }
-  }, n)
-  if (exists) { return s.json({ success: false, message: 'Username is in use' }) }
+  if (q.body.username.length < 4 || q.body.username.length > 32) { return s.json({ success: false, message: 'Invalid username provided' }) }
+  if (q.body.password.length < 8 || q.body.password.length > 64) { return s.json({ success: false, message: 'Invalid password provided' }) }
+  if (await !utils.verifyEmail(q.body.mailaddr)) { return s.json({ success: false, message: 'Invalid email address' }) }
+  // TODO: Check if username exists
   const salt = randomstring.generate(32)
-  bcrypt.hash(`${password}-${username}-${salt}`, 10, async (e, h) => {
+  bcrypt.hash(`${q.body.password}-${q.body.username}-${salt}`, 10, async (e, h) => {
     if (e) {
       consola.error(e)
-      return s.status(500).json({ success: false, message: 'There was an error processing your request' })
+      return s.status(500).json({ success: false, message: 'There was a problem processing your request' })
     }
-    const token = randomstring.generate(64)
     await db('users').insert({
-      username,
-      email: mailaddr,
+      username: q.body.username,
+      email: q.body.mailaddr,
       password: h,
       NaCl: salt,
-      token,
       permissions: 0,
       timestamp: Math.floor(+new Date() / 1000)
     })
+    // Default expiration of 24 hours *ish*
+    const token = jwt.sign({ username: q.body.username }, config.jwtSecret, { expiresIn: 86400 })
     return s.json({ success: true, token })
   })
 }
 
-AuthController.changePassword = async (q, s, n) => {
-  const user = await this.authorize(q, s)
-  const oldpass = q.body.oldpass
-  const newpass = q.body.newpass
-  const resetaccess = q.body.resetaccess === 'YES'
-  if (oldpass === undefined) { return s.json({ success: false, message: 'Current password not provided' }) }
-  if (newpass === undefined) { return s.json({ success: false, message: 'New password not provided' }) }
-  if (newpass.length < 8 || newpass.length > 64) { return s.json({ success: false, message: 'Invalid new password provided' }) }
-  const salt = randomstring.generate(32)
-  bcrypt.hash(`${newpass}-${user.username}-${salt}`, 10, async (e, h) => {
+AuthController.verifyUser = async (q, s, n) => {
+  if (!q.body.username || !q.body.password) { return s.status(401).json({ success: false, message: 'Required info missing' }) }
+  const user = await db('users').where('username', q.body.username).first()
+  if (!user) { return s.json({ success: false, message: 'Invalid username/password' }) }
+  bcrypt.compare(`${q.body.password}-${q.body.username}-${user.NaCl}`, user.password, (e, r) => {
     if (e) {
       consola.error(e)
-      return s.status(500).json({ success: false, message: 'There was an error processing your request' })
+      return s.status(500).json({ success: false, message: 'There was a problem processing your request' })
     }
-    await db('users').where('id', user.id).update({
-      password: h,
-      NaCl: salt,
-      token: resetaccess ? randomstring.generate(64) : user.token
-    })
+    if (!r) { return s.json({ success: false, message: 'Invalid username/password' }) }
+    const token = jwt.sign({ username: q.body.username }, config.jwtSecret, { expiresIn: 86400 })
+    return s.json({ success: true, token })
   })
 }
 
-// Token Operations
-
-AuthController.verifyToken = async (q, s, n) => {
-  const token = q.body.token
-  if (token === undefined) { return s.status(401).json({ success: false, message: 'Token not present' }) }
-  const user = await db('users').where('token', token).first()
-  if (!user) { return s.status(401).json({ success: false, message: 'Invalid token' }) }
-  return s.json({ success: true, username: user.username })
-}
-
-AuthController.showToken = async (q, s, n) => {
-  const user = await this.authorize(q, s)
-  return s.json({ success: true, token: user.token })
-}
-
-AuthController.resetToken = async (q, s, n) => {
-  const user = await this.authorize(q, s)
-  const token = randomstring.generate(64)
-  await db('users').where('token', user.token).update({ token })
-  s.json({ success: true, token })
+AuthController.fetchUser = async (q, s, n) => {
+  await utils.verifyToken(q, s, (t) => {
+    db('users').where('username', t.username).first().then((user) => {
+      if (!user) { return s.status(500).json({ success: false, message: 'There was a problem processing your request' }) }
+      s.status(200).json({
+        success: true,
+        user: {
+          username: t.username,
+          email: user.email,
+          permissions: user.permissions
+        }
+      })
+    })
+  })
 }
 
 // API Key Operations

@@ -64,9 +64,13 @@ module.exports = {
         endpoints: {
           login: { url: '/api/auth/login', method: 'post' },
           logout: false,
-          user: false
-          /* logout: { url: '/api/auth/logout', method: 'post' },
-          user: { url: '/api/auth/user', method: 'get' } */
+          /* logout: { url: '/api/auth/logout', method: 'post' }, */
+          user: { url: '/api/auth/user', method: 'get' }
+        },
+        redirect: {
+          login: '/login',
+          logout: '/login',
+          home: '/'
         }
       }
     },

@@ -80,7 +80,6 @@ DatabaseController.init = (db) => {
         table.string('email')
         table.string('password')
         table.string('NaCl')
-        table.string('token')
         table.integer('permissions') // See PermissionsController for format info
         table.integer('timestamp')
       }).then(() => {})
@@ -98,8 +97,7 @@ DatabaseController.init = (db) => {
           }
           db('users').where('username', 'admin').update({
             password: h,
-            NaCl: salt,
-            token: randomstring.generate(64)
+            NaCl: salt
           }).then(() => { consola.info('Admin password updated') })
         })
       } else {
@@ -116,7 +114,6 @@ DatabaseController.init = (db) => {
             email: 'admin@example.com',
             password: h,
             NaCl: salt,
-            token: randomstring.generate(64),
             permissions: 3,
             timestamp: Math.floor(+new Date() / 1000)
           }).then(() => { consola.info('Admin user created') })

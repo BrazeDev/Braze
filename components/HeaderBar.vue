@@ -5,28 +5,24 @@
       <span class="pl-3 inline-block font-fira align-middle">Braze</span>
     </a>
     <span class="pl-1 inline-block text-gray-500 font-fira align-middle">Braze.dev {{ version }}</span>
-    <span id="username"></span>
+    <span class="float-right font-fira align-middle mt-1">
+      {{ this.$auth.user.username }}
+      (<a id="logout" href="#" class=" text-purple-900 hover:text-purple-500 duration-200" @click="logout">Log Out</a>)
+    </span>
   </header>
 </template>
 
 <script>
-
-let username = ''
-
-function updateUsername () {
-  username = localStorage.getItem('user')
-  document.getElementById('username').innerHTML = username
-}
-
-if (process.browser) {
-  setTimeout(updateUsername, 20)
-}
-
 export default {
   data () {
     return {
-      version: require('~/metadata.json').version,
-      username
+      version: require('~/metadata.json').version
+    }
+  },
+  methods: {
+    logout () {
+      this.$auth.logout('local')
+      window.location.replace('/login')
     }
   }
 }
