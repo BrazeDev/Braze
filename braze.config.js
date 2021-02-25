@@ -45,15 +45,16 @@ module.exports = {
   blockBurnerDomains: true,
   performMXLookup: true,
 
-  /* Whether or not the bundled repo server will be run */
-  bundledRepo: true,
-
-  /** This section only applies if using the bundled repo server
-   *  The subdirectory on the webserver from where the repo will
-   *    be hosted.
-   *  http://your-server:3000/<repoSubdir>
-  */
-  repoSubdir: 'repo',
+  /** The directories that Braze will use - they will be created if
+   *  they do not exist.
+   */
+  folders: {
+    // The working directory for magic operations, and temporary
+    //   area for mods that haven't yet been assigned metadata
+    work: './work',
+    // The store for all mods managed by Braze
+    repo: './repo'
+  },
 
   /** It is important that this is set up, as it is used by Braze
    *    to store settings and other info.

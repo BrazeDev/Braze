@@ -7,6 +7,7 @@
    you can provide the environment variable `CONFIG_PATH` or run the app
    with the `--config=/path/to/config` argument */
 
+const fs = require('fs')
 const args = require('minimist')(process.argv.slice(2))
 const consola = require('consola')
 
@@ -60,14 +61,6 @@ const verifyConfig = (config) => {
     consola.error(`${location} - Malformed port, must be between 1 and 65535. Got "${config.port}"`)
     process.exit(1)
   }
-  if (!(config.bundledRepo === true || config.bundledRepo === false)) {
-    consola.error(`${location} - Malformed config option: 'bundledRepo', must be true or false. Got "${config.bundledRepo}"`)
-    process.exit(1)
-  }
-  if (config.bundledRepo === true && !(config.repoSubdir.length < 32 && config.repoSubdir.length > 0)) {
-    consola.error(`${location} - Malformed config option: 'repoSubdir', must be between 1 and 32 chars. Got "${config.repoSubdir}"`)
-    process.exit(1)
-  }
   if (typeof config.dbConnection === 'undefined' ||
       typeof config.dbConnection.client === 'undefined' ||
       !/^(pg)|(sqlite3)|(mysql)|(mssql)$/.test(config.dbConnection.client)) {
@@ -92,4 +85,35 @@ const setEnvironment = (config) => {
   return config
 }
 
-module.exports = setEnvironment(verifyConfig(loadConfig()))
+const checkAndCreateFolders = (config) => {
+  if (config.dbConnection.client === 'sqlite3') {
+    let db = config.dbConnection.connection.filename
+    db = db.substr(0, db.lastIndexOf('/'))
+    if (!fs.existsSync(db)) { fs.mkdirSync(db) }
+  }
+  const work = config.folders.work
+  const repo = config.folders.repo
+  if (!fs.existsSync(work)) {
+    consola.info(`Creating work directory at: ${work}`)
+    fs.mkdirSync(work)
+  }
+  if (!fs.existsSync(repo)) {
+    consola.info(`Creating repo directory at: ${repo}`)
+    fs.mkdirSync(repo)
+  }
+  try {
+    fs.accessSync(work, fs.constants.W_OK)
+  } catch (e) {
+    consola.error(`Work directory "${work}" is not writable`)
+    process.exit(3)
+  }
+  try {
+    fs.accessSync(repo, fs.constants.W_OK)
+  } catch (e) {
+    consola.error(`Repo directory "${repo}" is not writable`)
+    process.exit(3)
+  }
+  return config
+}
+
+module.exports = checkAndCreateFolders(setEnvironment(verifyConfig(loadConfig())))
