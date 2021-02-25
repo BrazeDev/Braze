@@ -79,5 +79,10 @@ module.exports = {
   },
 
   build: {
+    extend (config, { isDev, isClient }) {
+      config.node = {
+        fs: 'empty'
+      }
+    }
   }
 }

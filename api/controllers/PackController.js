@@ -1,4 +1,4 @@
-const { attachPaginate } = require('knex-paginate')
+// const { attachPaginate } = require('knex-paginate')
 // const consola = require('consola')
 // const config = require('../../config.js')
 // const db = require('./DatabaseController').db
