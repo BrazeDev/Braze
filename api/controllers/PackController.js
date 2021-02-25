@@ -4,50 +4,46 @@ const { attachPaginate } = require('knex-paginate')
 // const db = require('./DatabaseController').db
 const utils = require('./UtilsController')
 
-attachPaginate()
+// attachPaginate()
 
-const PackController = {}
-
-PackController.createMagicPack = async (q, s, n) => {
+exports.createMagicPack = async (q, s, n) => {
   await utils.verifyToken(q, s, (t) => {
     return s.json({ status: 'Not Yet Implemented' })
   })
 }
 
-PackController.packsInfo = async (q, s, n) => {
+exports.packsInfo = async (q, s, n) => {
   await utils.verifyToken(q, s, (t) => {
     return s.json({ status: 'Not Yet Implemented' })
   })
 }
 
-PackController.packList = async (q, s, n) => {
+exports.packList = async (q, s, n) => {
   await utils.verifyToken(q, s, (t) => {
     return s.json({ status: 'Not Yet Implemented' })
   })
 }
 
-PackController.getPackInfo = async (q, s, n) => {
+exports.getPackInfo = async (q, s, n) => {
   await utils.verifyToken(q, s, (t) => {
     return s.json({ status: 'Not Yet Implemented' })
   })
 }
 
-PackController.createPack = async (q, s, n) => {
+exports.createPack = async (q, s, n) => {
   await utils.verifyToken(q, s, (t) => {
     return s.json({ status: 'Not Yet Implemented' })
   })
 }
 
-PackController.deletePack = async (q, s, n) => {
+exports.deletePack = async (q, s, n) => {
   await utils.verifyToken(q, s, (t) => {
     return s.json({ status: 'Not Yet Implemented' })
   })
 }
 
-PackController.quickCreatePack = async (q, s, n) => {
+exports.quickCreatePack = async (q, s, n) => {
   await utils.verifyToken(q, s, (t) => {
     return s.json({ status: 'Not Yet Implemented' })
   })
 }
-
-module.exports = PackController

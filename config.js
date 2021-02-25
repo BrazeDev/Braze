@@ -74,8 +74,15 @@ const verifyConfig = (config) => {
     consola.error(`${location} - Malformed DB connection client, must be [ pg | sqlite3 | mysql | mssql ]. Got "${config.dbConnection.client}"`)
     process.exit(1)
   }
-  if (config.dbConnection.client === 'sqlite3' && process.env.NODE_ENV === 'production') {
+  if (config.dbConnection.client === 'sqlite3') {
     consola.warn('SQLite databases are discouraged for production use. If you experience performance issues, consider using a different database provider')
+  }
+  if (config.jwtSecret === 'XwD48UY5ymQJuMP_This_is_an_example_key_do_not_use_NZJhKLJrUDa5S8W') {
+    consola.error('The JWT secret has not be changed. Keeping the default value creates a serious risk of intrusion. Braze will now exit.')
+    // process.exit(1)
+  }
+  if (config.jwtSecret.toString().lenth < 32) {
+    consola.warn('The JWT secret should be at least 32 chars. Keys longer than 256 chars may cause performance issues')
   }
   return config
 }

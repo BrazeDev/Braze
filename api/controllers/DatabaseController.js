@@ -6,8 +6,6 @@ const config = require('../../config.js')
 // eslint-disable-next-line import/order
 const db = require('knex')(config.dbConnection)
 
-const DatabaseController = {}
-
 /* if (process.env.NODE_ENV === 'test') {
   this.db = this.init(this.preInit(require('knex')({
     client: 'sqlite3',
@@ -19,7 +17,46 @@ const DatabaseController = {}
   this.db = this.init()
 } */
 
-DatabaseController.preInit = (db) => {
+const setAdminPassword = () => {
+  if (config.resetAdminPass) {
+    db('users').where({ username: 'admin' }).then((u) => {
+      if (u.length > 0) {
+        consola.info('Admin user exists! Resetting password to configred value.')
+        const salt = randomstring.generate(32)
+        bcrypt.hash(`${config.adminPassword}-admin-${salt}`, 10, (e, h) => {
+          if (e) {
+            consola.error('Error generating password hash for admin user')
+            process.exit(9)
+          }
+          db('users').where('username', 'admin').update({
+            password: h,
+            NaCl: salt
+          }).then(() => { consola.info('Admin password updated') })
+        })
+      } else {
+        consola.info('Admin doesn\'t exist! Creating new account.')
+        const salt = randomstring.generate(32)
+        bcrypt.hash(`${config.adminPassword}-admin-${salt}`, 10, (e, h) => {
+          if (e) {
+            consola.error('Error generating password hash for admin user')
+            process.exit(9)
+          }
+          consola.info('Hash calculated')
+          db('users').insert({
+            username: 'admin',
+            email: 'admin@example.com',
+            password: h,
+            NaCl: salt,
+            permissions: 3,
+            timestamp: Math.floor(+new Date() / 1000)
+          }).then(() => { consola.info('Admin user created') })
+        })
+      }
+    })
+  }
+}
+
+exports.preInit = (db) => {
   if (config.dbConnection.client === 'sqlite3' && !fs.existsSync(config.dbConnection.connection.filename)) {
     consola.info('Database not found, a new one will be created.')
   }
@@ -33,7 +70,7 @@ DatabaseController.preInit = (db) => {
   return db
 }
 
-DatabaseController.init = (db) => {
+exports.init = (db) => {
   db.schema.hasTable('packs').then((r) => {
     if (!r) {
       db.schema.createTable('packs', (table) => {
@@ -82,48 +119,10 @@ DatabaseController.init = (db) => {
         table.string('NaCl')
         table.integer('permissions') // See PermissionsController for format info
         table.integer('timestamp')
-      }).then(() => {})
+      }).then(() => { setTimeout(setAdminPassword, 1000) })
     }
   })
-  if (config.resetAdminPass) {
-    db('users').where({ username: 'admin' }).then((u) => {
-      if (u.length > 0) {
-        consola.info('Admin user exists! Resetting password to configred value.')
-        const salt = randomstring.generate(32)
-        bcrypt.hash(`${config.adminPassword}-admin-${salt}`, 10, (e, h) => {
-          if (e) {
-            consola.error('Error generating password hash for admin user')
-            process.exit(9)
-          }
-          db('users').where('username', 'admin').update({
-            password: h,
-            NaCl: salt
-          }).then(() => { consola.info('Admin password updated') })
-        })
-      } else {
-        consola.info('Admin doesn\'t exist! Creating new account.')
-        const salt = randomstring.generate(32)
-        bcrypt.hash(`${config.adminPassword}-admin-${salt}`, 10, (e, h) => {
-          if (e) {
-            consola.error('Error generating password hash for admin user')
-            process.exit(9)
-          }
-          consola.info('Hash calculated')
-          db('users').insert({
-            username: 'admin',
-            email: 'admin@example.com',
-            password: h,
-            NaCl: salt,
-            permissions: 3,
-            timestamp: Math.floor(+new Date() / 1000)
-          }).then(() => { consola.info('Admin user created') })
-        })
-      }
-    })
-  }
   return db
 }
 
-DatabaseController.db = DatabaseController.init(db)
-
-module.exports = DatabaseController
+exports.db = exports.init(db)

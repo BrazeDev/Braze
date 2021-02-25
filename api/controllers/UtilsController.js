@@ -3,9 +3,7 @@ const jwt = require('jsonwebtoken')
 const config = require('../../config.js')
 const burners = require('../../burnermail.json')
 
-const UtilsController = {}
-
-UtilsController.verifyEmail = async (address) => {
+exports.verifyEmail = async (address) => {
   // Check email conforms with RFC 5322
   // Idk how this works but it's from https://stackoverflow.com/questions/201323/how-to-validate-an-email-address-using-a-regular-expression
   // eslint-disable-next-line no-control-regex
@@ -25,7 +23,7 @@ UtilsController.verifyEmail = async (address) => {
   return true
 }
 
-UtilsController.verifyToken = async (q, s, cb) => {
+exports.verifyToken = async (q, s, cb) => {
   if (!q.headers.authorization.toString().split(' ')[1]) { s.status(401).json({ success: false, message: 'No token provided' }) }
   await jwt.verify(q.headers.authorization.toString().split(' ')[1], config.jwtSecret, (e, t) => {
     if (e) { return s.status(500).json({ success: false, message: 'There was a problem processing your request' }) }
@@ -33,5 +31,3 @@ UtilsController.verifyToken = async (q, s, cb) => {
     cb(t)
   })
 }
-
-module.exports = UtilsController

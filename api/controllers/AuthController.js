@@ -9,12 +9,10 @@ const utils = require('./UtilsController')
 
 attachPaginate()
 
-const AuthController = {}
-
 /** User Authentication
  *  -------------------  */
 
-AuthController.registerUser = async (q, s, n) => {
+exports.registerUser = async (q, s, n) => {
   if (!config.enableRegister) { return s.json({ success: false, message: 'Registration is disabled' }) }
   if (!q.body.username || !q.body.password || !q.body.mailaddr) {
     return s.status(401).json({ success: false, message: 'Required info missing' })
@@ -43,7 +41,7 @@ AuthController.registerUser = async (q, s, n) => {
   })
 }
 
-AuthController.verifyUser = async (q, s, n) => {
+exports.verifyUser = async (q, s, n) => {
   if (!q.body.username || !q.body.password) { return s.status(401).json({ success: false, message: 'Required info missing' }) }
   const user = await db('users').where('username', q.body.username).first()
   if (!user) { return s.json({ success: false, message: 'Invalid username/password' }) }
@@ -58,7 +56,7 @@ AuthController.verifyUser = async (q, s, n) => {
   })
 }
 
-AuthController.fetchUser = async (q, s, n) => {
+exports.fetchUser = async (q, s, n) => {
   await utils.verifyToken(q, s, (t) => {
     db('users').where('username', t.username).first().then((user) => {
       if (!user) { return s.status(500).json({ success: false, message: 'There was a problem processing your request' }) }
@@ -77,7 +75,7 @@ AuthController.fetchUser = async (q, s, n) => {
 /** API Keys
  *  -------------------  */
 
-AuthController.verifyKey = async (q, s, n) => {
+exports.verifyKey = async (q, s, n) => {
   if (process.env.NODE_ENV !== 'PRODUCTION' && q.header('override-devkey') !== 'YES') {
     return s.json({
       valid: 'Key validated.',
@@ -92,7 +90,7 @@ AuthController.verifyKey = async (q, s, n) => {
   return { valid: true, name: kdb.keyname, created_at: kdb.timestamp }
 }
 
-AuthController.addKey = async (q, s, n) => {
+exports.addKey = async (q, s, n) => {
   const user = await this.authorize(q, s)
   const key = q.params.key
   const keyname = q.body.keyname
@@ -108,7 +106,7 @@ AuthController.addKey = async (q, s, n) => {
   })
 }
 
-AuthController.listKeys = async (q, s, n) => {
+exports.listKeys = async (q, s, n) => {
   // eslint-disable-next-line no-unused-vars
   const user = await this.authorize(q, s)
   db('apikeys').paginate({
@@ -120,7 +118,7 @@ AuthController.listKeys = async (q, s, n) => {
   })
 }
 
-AuthController.removeKey = async (q, s, n) => {
+exports.removeKey = async (q, s, n) => {
   // eslint-disable-next-line no-unused-vars
   const user = await this.authorize(q, s)
   const key = q.params.key
@@ -131,5 +129,3 @@ AuthController.removeKey = async (q, s, n) => {
     return s.json({ success: true, message: 'Key deleted' })
   })
 }
-
-module.exports = AuthController
