@@ -12,7 +12,7 @@ steps:
   - name: NPM Audit
     image: node:alpine
     commands:
-      - npm audit --package-lock-only --production --audit-level=moderate
+      - npm audit --production --audit-level=moderate
   
   - name: Install Packages
     image: node:alpine
