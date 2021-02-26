@@ -9,9 +9,17 @@ const utils = require('./UtilsController')
 
 attachPaginate()
 
-/** User Authentication
- *  -------------------  */
+/*
+  User Authentication
+  -------------------
+*/
 
+/**
+ * Adds a new user to the database after performing checks to ensure the info is valid
+ * @param {*} q Express Request
+ * @param {*} s Express Response
+ * @param {*} n Express "next" callback
+ */
 exports.registerUser = async (q, s, n) => {
   if (!config.enableRegister) { return s.json({ success: false, message: 'Registration is disabled' }) }
   if (!q.body.username || !q.body.password || !q.body.mailaddr) {
@@ -41,6 +49,12 @@ exports.registerUser = async (q, s, n) => {
   })
 }
 
+/**
+ * Verifies that a user is valid, checking the password of the user against the database
+ * @param {*} q Express Request
+ * @param {*} s Express Response
+ * @param {*} n Express "next" callback
+ */
 exports.verifyUser = async (q, s, n) => {
   if (!q.body.username || !q.body.password) { return s.status(401).json({ success: false, message: 'Required info missing' }) }
   const user = await db('users').where('username', q.body.username).first()
@@ -56,6 +70,13 @@ exports.verifyUser = async (q, s, n) => {
   })
 }
 
+/**
+ * Gets info about the user. The "user" object in the JSON response will become
+ * `this.$auth.user` via nuxt auth
+ * @param {*} q Express Request
+ * @param {*} s Express Response
+ * @param {*} n Express "next" callback
+ */
 exports.fetchUser = async (q, s, n) => {
   await utils.verifyToken(q, s, (t) => {
     db('users').where('username', t.username).first().then((user) => {
@@ -72,9 +93,17 @@ exports.fetchUser = async (q, s, n) => {
   })
 }
 
-/** API Keys
- *  -------------------  */
+/*
+  API Key management
+  ------------------
+*/
 
+/**
+ * Verifies an API key against the database
+ * @param {*} q Express Request
+ * @param {*} s Express Response
+ * @param {*} n Express "next" callback
+ */
 exports.verifyKey = async (q, s, n) => {
   if (process.env.NODE_ENV !== 'PRODUCTION' && q.header('override-devkey') !== 'YES') {
     return s.json({
@@ -90,6 +119,12 @@ exports.verifyKey = async (q, s, n) => {
   return { valid: true, name: kdb.keyname, created_at: kdb.timestamp }
 }
 
+/**
+ * Adds a new API key to the database (Requires auth)
+ * @param {*} q Express Request
+ * @param {*} s Express Response
+ * @param {*} n Express "next" callback
+ */
 exports.addKey = async (q, s, n) => {
   const user = await this.authorize(q, s)
   const key = q.params.key
@@ -106,6 +141,12 @@ exports.addKey = async (q, s, n) => {
   })
 }
 
+/**
+ * Lists all API keys that are in the database (Requires auth)
+ * @param {*} q Express Request
+ * @param {*} s Express Response
+ * @param {*} n Express "next" callback
+ */
 exports.listKeys = async (q, s, n) => {
   // eslint-disable-next-line no-unused-vars
   const user = await this.authorize(q, s)
@@ -118,6 +159,12 @@ exports.listKeys = async (q, s, n) => {
   })
 }
 
+/**
+ * Instantly removes the given key from the database (Requires auth)
+ * @param {*} q Express Request
+ * @param {*} s Express Response
+ * @param {*} n Express "next" callback
+ */
 exports.removeKey = async (q, s, n) => {
   // eslint-disable-next-line no-unused-vars
   const user = await this.authorize(q, s)

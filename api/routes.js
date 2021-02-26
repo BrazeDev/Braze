@@ -1,21 +1,38 @@
 const express = require('express')
+const multer = require('multer')
 const config = require('../config.js')
 const AuthController = require('./controllers/AuthController.js')
 const ModController = require('./controllers/ModController.js')
 const PackController = require('./controllers/PackController.js')
-const solderapi = require('./controllers/SolderAPIController')
+const SolderController = require('./controllers/SolderAPIController.js')
+const utils = require('./controllers/UtilsController.js')
 const router = express.Router()
 
-/** Solder Routes
- *  ----------------  */
+/* Multer uploads
+ * ----------------  */
 
-router.get('/', solderapi.version)
+// eslint-disable-next-line no-unused-vars
+const upload = multer({
+  storage: multer.diskStorage({
+    destination (q, f, cb) {
+      cb(null, config.folders.work)
+    },
+    filename (q, f, cb) {
+      cb(null, utils.transformFilename(q, f))
+    }
+  })
+})
+
+/* Solder Routes
+ * ----------------  */
+
+router.get('/', SolderController.version)
 
 router.get('/verify', (q, s, n) => AuthController.verifyKey(q, s, n))
 router.get('/verify/:key', (q, s, n) => AuthController.verifyKey(q, s, n))
 
-/** Braze API
- *  ----------------  */
+/* Braze API
+ * ----------------  */
 
 router.get('/v1/', (q, s, n) => {
   s.json({
@@ -27,22 +44,22 @@ router.get('/v1/', (q, s, n) => {
   })
 })
 
-/** User Auth Routes
- *  ----------------  */
+/* User Auth Routes
+ * ----------------  */
 
 router.post('/auth/login', (q, s, n) => AuthController.verifyUser(q, s, n))
 router.post('/auth/register', (q, s, n) => AuthController.registerUser(q, s, n))
 router.get('/auth/user', (q, s, n) => AuthController.fetchUser(q, s, n))
 
-/** API Key Routes
- *  ----------------  */
+/* API Key Routes
+ * ----------------  */
 
 router.put('/keys/:key', (q, s, n) => AuthController.addKey(q, s, n))
 router.get('/keys/:page', (q, s, n) => AuthController.listKeys(q, s, n))
 router.delete('/keys/:key', (q, s, n) => AuthController.removeKey(q, s, n))
 
-/** Mod Routes
- *  ----------------  */
+/* Mod Routes
+ * ----------------  */
 
 // Lists meta-info about the mods (count, total versions, latest, etc.)
 router.get('/mods/', (q, s, n) => ModController.modsInfo(q, s, n))
@@ -57,8 +74,8 @@ router.delete('/mods/:slug', (q, s, n) => ModController.deleteMod(q, s, n))
 // Identifies what has been uploaded and returns information about the uploaded .zip/.jar/etc.
 router.post('/mods/id', (q, s, n) => ModController.identifyMod(q, s, n))
 
-/** Pack Routes
- *  ----------------  */
+/* Pack Routes
+ * ----------------  */
 
 // Does some real-life magic! (takes instance .zip and creates mods/pack from it)
 router.post('/packs/imfeelinglucky', (q, s, n) => PackController.createMagicPack(q, s, n))

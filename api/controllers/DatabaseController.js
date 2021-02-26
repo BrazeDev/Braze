@@ -17,6 +17,9 @@ const db = require('knex')(config.dbConnection)
   this.db = this.init()
 } */
 
+/**
+ * Sets the password of the `admin` user to the one specified in `braze.config.js`
+ */
 const setAdminPassword = () => {
   if (config.resetAdminPass) {
     db('users').where({ username: 'admin' }).then((u) => {
@@ -56,6 +59,10 @@ const setAdminPassword = () => {
   }
 }
 
+/**
+ * Ensures that the database exists and that the config is valid
+ * @param {knex} db The Knex database connector
+ */
 exports.preInit = (db) => {
   if (config.dbConnection.client === 'sqlite3' && !fs.existsSync(config.dbConnection.connection.filename)) {
     consola.info('Database not found, a new one will be created.')
@@ -70,6 +77,10 @@ exports.preInit = (db) => {
   return db
 }
 
+/**
+ * Checks for and creates tables that are used by braze
+ * @param {knex} db The Knex database connector
+ */
 exports.init = (db) => {
   db.schema.hasTable('packs').then((r) => {
     if (!r) {
