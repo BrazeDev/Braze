@@ -1,10 +1,7 @@
-const { attachPaginate } = require('knex-paginate')
 // const consola = require('consola')
 // const config = require('../../config.js')
 // const db = require('./DatabaseController').db
 const utils = require('./UtilsController')
-
-// attachPaginate()
 
 exports.modsInfo = async (q, s, n) => {
   await utils.verifyToken(q, s, (t) => {

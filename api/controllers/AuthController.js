@@ -1,13 +1,10 @@
 const jwt = require('jsonwebtoken')
 const randomstring = require('randomstring')
-const { attachPaginate } = require('knex-paginate')
 const consola = require('consola')
 const bcrypt = require('bcrypt')
 const config = require('../../config.js')
 const db = require('./DatabaseController').db
 const utils = require('./UtilsController')
-
-attachPaginate()
 
 /*
   User Authentication
