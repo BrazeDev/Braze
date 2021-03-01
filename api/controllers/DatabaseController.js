@@ -101,6 +101,19 @@ exports.init = (db) => {
         table.integer('user')
         table.string('name')
         table.string('slug')
+        table.string('author')
+        table.string('image')
+        table.string('url')
+        table.integer('enabled')
+        table.integer('timestamp')
+      }).then(() => {})
+    }
+  })
+  db.schema.hasTable('versions').then((r) => {
+    if (!r) {
+      db.schema.createTable('versions', (table) => {
+        table.increments()
+        table.integer('mod')
         table.string('version')
         table.string('filename')
         table.string('md5')

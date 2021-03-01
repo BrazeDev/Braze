@@ -3,6 +3,7 @@ const multer = require('multer')
 const config = require('../config.js')
 const AuthController = require('./controllers/AuthController.js')
 const ModController = require('./controllers/ModController.js')
+const KeyController = require('./controllers/KeyController.js')
 const PackController = require('./controllers/PackController.js')
 const SolderController = require('./controllers/SolderAPIController.js')
 const utils = require('./controllers/UtilsController.js')
@@ -54,9 +55,9 @@ router.get('/auth/user', (q, s, n) => AuthController.fetchUser(q, s, n))
 /* API Key Routes
  * ----------------  */
 
-router.put('/keys/:key', (q, s, n) => AuthController.addKey(q, s, n))
-router.get('/keys/:page', (q, s, n) => AuthController.listKeys(q, s, n))
-router.delete('/keys/:key', (q, s, n) => AuthController.removeKey(q, s, n))
+router.put('/keys/:key', (q, s, n) => KeyController.addKey(q, s, n))
+router.get('/keys/:page', (q, s, n) => KeyController.listKeys(q, s, n))
+router.delete('/keys/:key', (q, s, n) => KeyController.removeKey(q, s, n))
 
 /* Mod Routes
  * ----------------  */
@@ -67,10 +68,12 @@ router.get('/mods/', (q, s, n) => ModController.modsInfo(q, s, n))
 router.get('/mods/list/:page', (q, s, n) => ModController.modList(q, s, n))
 // Gets info about the mod with the supplied slug
 router.get('/mods/:slug', (q, s, n) => ModController.getModInfo(q, s, n))
+// Gets info about the mod with the supplied slug
+router.get('/mods/:slug/:vers', (q, s, n) => ModController.getModInfoVer(q, s, n))
 // Creates a mod with the supplied slug
-router.post('/mods/:slug', (q, s, n) => ModController.createMod(q, s, n))
+router.post('/mods/:slug/:vers', (q, s, n) => ModController.createMod(q, s, n))
 // Deletes the mod with the supplied slug
-router.delete('/mods/:slug', (q, s, n) => ModController.deleteMod(q, s, n))
+router.delete('/mods/:slug/:vers', (q, s, n) => ModController.deleteMod(q, s, n))
 // Identifies what has been uploaded and returns information about the uploaded .zip/.jar/etc.
 router.post('/mods/id', (q, s, n) => ModController.identifyMod(q, s, n))
 

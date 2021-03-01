@@ -1,6 +1,7 @@
 // const consola = require('consola')
 // const config = require('../../config.js')
 // const db = require('./DatabaseController').db
+const { db } = require('./DatabaseController')
 const utils = require('./UtilsController')
 
 exports.createMagicPack = async (q, s, n) => {
