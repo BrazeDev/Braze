@@ -6,6 +6,8 @@
 [![MIT License][license-shield]][license-url]
 [![Build][build-shield]][build-url]
 
+## ACTIVE DEVELOPMENT OF BRAZE IS RESUMING!
+
 <br />
 <p align="center">
   <a href="https://github.com/thatsimplekid/braze">
