@@ -6,7 +6,7 @@
 [![MIT License][license-shield]][license-url]
 [![Build][build-shield]][build-url]
 
-## ACTIVE DEVELOPMENT OF BRAZE IS RESUMING!
+## THIS BRANCH IS NO LONGER BEING UPDATED, CHECK 'MASTER' FOR NEWEST CODE.
 
 <br />
 <p align="center">
